@@ -3,5 +3,5 @@
     <string name="login.error.message">Imposible iniciar sesión %s</string>
     <string name="main.header.images">Imágenes</string>
     <string name="main.header.hashtag">Hashtags</string>
-    <string name="main.menu.action.logout">Cerrar seeión</string>
+    <string name="main.menu.action.logout">Cerrar sesión</string>
 </resources>
