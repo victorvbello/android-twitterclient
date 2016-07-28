@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void failure(TwitterException exception) {
                 String msgError=String.format(getString(R.string.login_error_message),exception.getLocalizedMessage());
-                Snackbar.make(container,msgError,Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(container,msgError,Snackbar.LENGTH_LONG).show();
             }
         });
     }

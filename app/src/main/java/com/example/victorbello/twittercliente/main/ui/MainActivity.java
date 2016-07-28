@@ -11,18 +11,22 @@ import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.victorbello.twittercliente.LoginActivity;
 import com.twitter.sdk.android.Twitter;
 
 import com.example.victorbello.twittercliente.R;
+import com.example.victorbello.twittercliente.LoginActivity;
+import com.example.victorbello.twittercliente.images.ui.ImagesFragment;
+import com.example.victorbello.twittercliente.hashtag.HashtagFragment;
+import com.example.victorbello.twittercliente.main.adapters.MainSectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TabLayout tabs;
-    private ViewPager container;
+    private ViewPager viewPager;
 
 
     @Override
@@ -32,7 +36,19 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar=(Toolbar) findViewById(R.id.toolbar);
         tabs=(TabLayout) findViewById(R.id.tabs);
-        container=(ViewPager) findViewById(R.id.container);
+        viewPager=(ViewPager) findViewById(R.id.viewPager);
+
+        setSupportActionBar(toolbar);
+        setupAdapter();
+    }
+
+    public void setupAdapter(){
+        Fragment [] fragments=new Fragment[]{new ImagesFragment(), new HashtagFragment()};
+        String[] titles=new String[]{getString(R.string.main_header_images),getString(R.string.main_header_hashtag)};
+        MainSectionsPagerAdapter adapter=new MainSectionsPagerAdapter(getSupportFragmentManager(),titles,fragments);
+
+        viewPager.setAdapter(adapter);
+        tabs.setupWithViewPager(viewPager);
     }
 
     @Override
