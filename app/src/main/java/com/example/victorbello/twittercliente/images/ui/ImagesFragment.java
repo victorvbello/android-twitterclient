@@ -7,6 +7,7 @@ package com.example.victorbello.twittercliente.images.ui;
 import android.content.ClipData;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
@@ -14,16 +15,21 @@ import android.support.v4.app.Fragment;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.design.widget.Snackbar;
 
 import android.net.Uri;
 import java.util.List;
 
 import com.example.victorbello.twittercliente.R;
+import com.example.victorbello.twittercliente.TwitterClientApp;
 import com.example.victorbello.twittercliente.entities.Image;
 import com.example.victorbello.twittercliente.images.ImagesPresenter;
+import com.example.victorbello.twittercliente.images.di.ImagesComponent;
 import com.example.victorbello.twittercliente.images.ui.adapters.ImagesAdapter;
 import com.example.victorbello.twittercliente.images.ui.adapters.OnItemClickListener;
+
+import javax.inject.Inject;
 
 
 public class ImagesFragment extends Fragment implements ImagesView, OnItemClickListener{
@@ -32,8 +38,10 @@ public class ImagesFragment extends Fragment implements ImagesView, OnItemClickL
     private ProgressBar progressBar;
     private FrameLayout container;
 
-    private ImagesPresenter presenter;
-    private ImagesAdapter adapter;
+    @Inject
+    public ImagesPresenter presenter;
+    @Inject
+    public ImagesAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -42,7 +50,24 @@ public class ImagesFragment extends Fragment implements ImagesView, OnItemClickL
         recyclerView=(RecyclerView) view.findViewById(R.id.recyclerView);
         progressBar=(ProgressBar) view.findViewById(R.id.progressBar);
         container=(FrameLayout) view.findViewById(R.id.container);
+
+        setupInjection();
+        presenter.getImageTweets();
+        setupRecyclerView();
         return view;
+    }
+
+    private void setupRecyclerView() {
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        recyclerView.setAdapter(adapter);
+        Log.i("TW-ImagesFragment","setupRecyclerView");
+    }
+
+    private void setupInjection() {
+        TwitterClientApp app=(TwitterClientApp)getActivity().getApplication();
+        ImagesComponent imagesComponent=app.getImagesComponent(this,this,this);
+        imagesComponent.inject(this);
+        Log.i("TW-ImagesFragment","setupInjection");
     }
 
     @Override
@@ -90,6 +115,7 @@ public class ImagesFragment extends Fragment implements ImagesView, OnItemClickL
 
     @Override
     public void setContent(List<Image> items) {
+        Log.i("TW-ImagesFragment","setContent "+items.size());
         adapter.setItems(items);
     }
 
