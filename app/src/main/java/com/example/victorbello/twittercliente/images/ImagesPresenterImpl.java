@@ -4,6 +4,8 @@ package com.example.victorbello.twittercliente.images;
  * Created by victorbello on 22/07/16.
  */
 
+import android.util.Log;
+
 import com.example.victorbello.twittercliente.images.events.ImagesEvent;
 import com.example.victorbello.twittercliente.images.ui.ImagesView;
 import com.example.victorbello.twittercliente.lib.base.EventBus;
@@ -43,12 +45,15 @@ public class ImagesPresenterImpl implements ImagesPresenter {
         if(view!=null){
             view.hideImages();
             view.showProgress();
+            Log.i("TW-ImagesPresenterImpl","getImageTweets");
         }
+        interactor.execute();
     }
 
     @Override
     @Subscribe
     public void onEventMainThread(ImagesEvent event) {
+        Log.i("TW-ImagesPresenterImpl","onEventMainThread");
         String errorMsg=event.getError();
         if(view!=null){
             view.showImages();

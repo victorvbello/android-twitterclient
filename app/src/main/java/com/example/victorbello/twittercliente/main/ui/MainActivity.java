@@ -19,7 +19,7 @@ import com.twitter.sdk.android.Twitter;
 import com.example.victorbello.twittercliente.R;
 import com.example.victorbello.twittercliente.LoginActivity;
 import com.example.victorbello.twittercliente.images.ui.ImagesFragment;
-import com.example.victorbello.twittercliente.hashtag.HashtagFragment;
+import com.example.victorbello.twittercliente.hashtag.ui.HashtagFragment;
 import com.example.victorbello.twittercliente.main.adapters.MainSectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
