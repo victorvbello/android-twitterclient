@@ -4,7 +4,6 @@ package com.example.victorbello.twittercliente.images.ui;
  * Created by victorbello on 22/07/16.
  */
 
-import android.content.ClipData;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
@@ -110,7 +109,7 @@ public class ImagesFragment extends Fragment implements ImagesView, OnItemClickL
 
     @Override
     public void onError(String Error) {
-        Snackbar.make(container,Error,Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(container,Error,Snackbar.LENGTH_LONG).show();
     }
 
     @Override

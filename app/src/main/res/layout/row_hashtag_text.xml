@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:background="@android:color/holo_blue_dark"
-        android:padding="@dimen/appbar_padding_top"/>
+        android:padding="@dimen/hashtag_padding"
+        android:textSize="@dimen/hashtag_size_text"/>
 
 </LinearLayout>

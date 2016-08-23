@@ -40,6 +40,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
         Image imageTweet=dataset.get(position);
         holder.setOnClickListener(imageTweet,clickListener);
         holder.txtTweet.setText(imageTweet.getTweetText());
+        holder.txtFavorite.setText(String.valueOf(imageTweet.getFavoriteCount()));
         imagenLoader.load(holder.imgMedia,imageTweet.getImageURL());
     }
 
@@ -58,11 +59,13 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
         private View view;
         private ImageView imgMedia;
         private TextView txtTweet;
+        private TextView txtFavorite;
 
         public ViewHolder(View itemView) {
             super(itemView);
             imgMedia=(ImageView)itemView.findViewById(R.id.imgMedia);
             txtTweet=(TextView)itemView.findViewById(R.id.txtTweet);
+            txtFavorite=(TextView)itemView.findViewById(R.id.txtFavorite);
             this.view=itemView;
         }
 
