@@ -12,7 +12,7 @@ public class Hashtag {
     private String tweetText;
     private int favoriteCount;
     private List<String> hastags;
-    private final static String BASE_TWEET_URL="https://twitter.com/null/status";
+    private final static String BASE_TWEET_URL="https://twitter.com/null/status/";
 
     public String getId() {
         return id;
@@ -46,7 +46,11 @@ public class Hashtag {
         this.hastags = hastags;
     }
 
-    public String getBaseTweetUrl() {
-        return BASE_TWEET_URL + this.id;
+    public static String getBaseTweetUrl() {
+        return BASE_TWEET_URL;
+    }
+
+    public String getTweetUrl(){
+        return BASE_TWEET_URL+this.id;
     }
 }

@@ -5,6 +5,7 @@ package com.example.victorbello.twittercliente.hashtag.ui;
  */
 
 import android.os.Bundle;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.Snackbar;
+
+import android.net.Uri;
 
 import com.example.victorbello.twittercliente.R;
 import com.example.victorbello.twittercliente.TwitterClientApp;
@@ -73,7 +76,7 @@ public class HashtagFragment extends Fragment implements HashtagView, OnItemClic
 
     @Override
     public void onPause(){
-        presenter.onResume();
+        presenter.onPause();
         super.onPause();
     }
 
@@ -105,7 +108,7 @@ public class HashtagFragment extends Fragment implements HashtagView, OnItemClic
 
     @Override
     public void onError(String error) {
-        Snackbar.make(container,error,Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(container,error,Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -115,6 +118,7 @@ public class HashtagFragment extends Fragment implements HashtagView, OnItemClic
 
     @Override
     public void onItemClick(Hashtag hashtag) {
-
+        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(hashtag.getTweetUrl()));
+        startActivity(intent);
     }
 }

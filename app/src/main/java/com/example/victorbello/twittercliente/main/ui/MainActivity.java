@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         setupAdapter();
+        setupToolbar();
     }
 
     public void setupAdapter(){
@@ -72,5 +73,13 @@ public class MainActivity extends AppCompatActivity {
                         |Intent.FLAG_ACTIVITY_NEW_TASK
                         |Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+    public void setupToolbar(){
+        String title=getString(R.string.app_name);
+        if(Twitter.getSessionManager().getActiveSession()!=null){
+            title+=" ("+Twitter.getSessionManager().getActiveSession().getUserName()+")";
+        }
+        toolbar.setTitle(title);
+        setSupportActionBar(toolbar);
     }
 }
